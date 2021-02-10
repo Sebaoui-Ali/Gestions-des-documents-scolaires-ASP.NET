@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication3.Models.demande>
+@{
+    ViewBag.Title = "Liste des demandes récentes";
+}
+
+<h1>Liste des demandes récentes</h1>
+
+<hr />
+<a href="
+   @Url.Action("Show")"
+   class="btn btn-primary">
+    Effectuer Demande
+</a>
+<div class="alert alert-warning @(Model.Any() ? "d-none" : "")">
+    No books added yet!
+</div>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>TYPE DE DEMANDE</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var demande in Model)
+        {
+            <tr>
+
+                <td>@demande.type</td>
+
+
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>

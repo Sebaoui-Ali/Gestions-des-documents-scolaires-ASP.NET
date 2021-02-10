@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Document_Management_Application.Models.Document>
+
+@{
+    ViewBag.Title = "Certificats scolaires";
+}
+<br />
+<br />
+<h1 style="padding-top:5%; text-align:center;">Certificats scolaires</h1>
+
+<hr />
+<br />
+<hr style="padding-top:1%;" />
+<div class="container">
+    <div class="d-flex justify-content-center">
+        @Html.ActionLink("Demandes Acceptées", "Accepted", "List", null, new { @class = "btn btn-primary m-3" })
+        @Html.ActionLink("Demandes Refusées", "Refused", "List", null, new { @class = "btn btn-primary m-3" })
+    </div>
+    <br />
+
+    <table class="table" id="Document">
+        <thead>
+            <tr>
+
+                <th>Type de la demande</th>
+                <th>Etudiant</th>
+                <th>Statut de la demande</th>
+                <th>Date de création</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var Document in Model)
+            {
+            <tr>
+
+                <td>@Document.Type</td>
+                <td>@Document.Etudiant.Nom @Document.Etudiant.Prenom </td>
+                @if (Document.Status == 0)
+                {
+                    <td>En Attente </td>
+
+                }
+                else if (Document.Status == 2)
+                {
+                    <td>Refusée </td>
+                }
+                else
+                {
+                    <td>Acceptée </td>
+                }
+                <td>@Document.DateCreation</td>
+                <td>
+                    <div class="mt-3">
+                        <input value="Plus infos" type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#exampleModal_@Document.Id" />
+                    </div>
+
+                    <div class="modal fade" id="exampleModal_@Document.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Information d'etudiant</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <ul>
+                                        <li>Nom : @Document.Etudiant.Nom</li>
+                                        <li>Prenom : @Document.Etudiant.Prenom</li>
+                                        <li>Email : @Document.Etudiant.Email</li>
+                                        <li>Code d'apogee : @Document.Etudiant.NumApogee </li>
+                                        <li>CIN : @Document.Etudiant.Cin </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+
+        $(document).ready(function () {
+            $('#Document').DataTable();
+        });
+    </script>
+}

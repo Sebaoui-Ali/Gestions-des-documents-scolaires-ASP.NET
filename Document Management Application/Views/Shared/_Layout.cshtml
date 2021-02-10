@@ -1,0 +1,205 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>@ViewBag.Title - Services</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="bootstrap 4, premium, marketing, multipurpose" />
+    <meta content="Themesdesign" name="author" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="~/Content/images/ENSA-Tétouan.png">
+
+    <!-- Pe-7 icon -->
+    <link href="~/Content/css/pe-icon-7.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!-- css -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <!--Navbar Start-->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark align-items-center nav-sticky">
+        <div class="container">
+            <!-- LOGO -->
+            <a class="logo mr-3" href="/">
+                <img src="~/Content/images/ENSA-Tétouan.png" alt="" class="" height="26">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="" data-feather="menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav navbar-center" id="mySidenav">
+
+                    <li class="nav-item active">
+                        @if (!Request.IsAuthenticated)
+                        {
+
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+
+                        }
+
+                    </li>
+                    <li class="nav-item">
+                        @if (!Request.IsAuthenticated)
+                        {
+
+                            @Html.ActionLink("Creer Demande", "Create", "Document", null, new { @class = "nav-link" })
+
+                        }
+
+                    </li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+
+                            @Html.ActionLink("Historique", "Index", "List", null, new { @class = "nav-link" })
+                        </li>
+
+                    }
+
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+
+                            @Html.ActionLink("Convension de stage", "Convension", "List", null, new { @class = "nav-link" })
+                        </li>
+
+                    }
+
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+
+                            @Html.ActionLink("Cerficats scolaires", "certficat", "List", null, new { @class = "nav-link" })
+                        </li>
+
+                    }
+
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+
+                            @Html.ActionLink("Attestation de réussite", "Attestation", "List", null, new { @class = "nav-link" })
+                        </li>
+                    }
+
+
+
+                </ul>
+
+                <ul class="list-inline ml-auto menu-social-icon mb-0 py-2 py-lg-0">
+
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li class="list-inline-item ml-0">
+
+                            @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-primary" })
+                        </li>
+                    }
+
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="list-inline-item ml-0">
+
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+
+
+                                <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+
+                            }
+                        </li>
+                    }
+
+
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <div class="">
+        @RenderBody()
+        <hr />
+        <br/><br /><br /><br />
+        <!-- Footer Start -->
+        <section class="footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-5">
+                            <p class="text-white-50 f-15 mb-0">2021 © ENSATe. CopyRight - Tous les droits sont reserve - .NET</p>
+                        </div>
+                    </div>
+                </div>
+          
+        </section>
+        <!-- Footer End -->
+        <!-- javascript -->
+        <script src="~/Content/js/jquery.min.js"></script>
+        <script src="~/Content/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/js/scrollspy.min.js"></script>
+        <script src="~/Content/js/jquery.easing.min.js"></script>
+        <!-- feather icons -->
+        <script src="https://unpkg.com/feather-icons"></script>
+
+        <!-- carousel -->
+        <script src="~/Content/js/owl.carousel.min.js"></script>
+
+        <!-- Main Js -->
+        <script src="~/Content/js/app.js"></script>
+
+        <script>
+            // Fether icon
+            feather.replace()
+
+            // Testimonial
+            $('#testi-clients').owlCarousel({
+                loop: true,
+                center: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                margin: 20,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            })
+        </script>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Document_Management_Application.Models.Document>
+@{
+    ViewBag.Title = "Historique des Demandes ";
+}
+
+<h1 style="padding-top:5%; text-align:center;">Historique des Demandes</h1>
+
+<hr />
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>Type de la demande</th>
+            <th>ID Etudiant</th>
+            <th>Statut de la demande</th>
+            <th>Date de création</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+            
+                @foreach (var Document in Model)
+                {
+        <tr>
+        
+            <td>@Document.Type</td>
+            <td>@Document.EtudiantId</td>
+            <td>@Document.Status</td>
+            <td>@Document.DateCreation</td>
+
+        </tr>
+                }
+            
+       
+    </tbody>
+
+</table>

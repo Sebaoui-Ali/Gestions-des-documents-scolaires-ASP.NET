@@ -1,0 +1,30 @@
+﻿@model WebApplication3.ViewModels.DemandeFormViewModel
+@{
+    ViewBag.Title = "Affichage des demandes Récentes";
+
+}
+
+<h2>Effectuerdemande</h2>
+<hr />
+@using (Html.BeginForm("Save", "Recent"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.type)
+
+        @Html.TextAreaFor(m => m.type, new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(m => m.type, null, new { @class = "text-danger" })
+
+    </div>
+    <button type="submit" class="btn btn-primary">
+        Envoyer
+    </button>
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
+
